@@ -169,7 +169,7 @@ function provisioning_get_extensions() {
             fi
         fi
     done
-    for i in (( i=0; i<${#EXTENSIONS_NAMED[@]}-1; i+=2 )); do
+    for (( i=0; i<${#EXTENSIONS_NAMED[@]}-1; i+=2 )); do
         repo="${EXTENSIONS_NAMED[$i]}"
         dir="${EXTENSIONS_NAMED[$((i+1))]}"
         path="/opt/stable-diffusion-webui/extensions/${dir}"
