@@ -13,7 +13,7 @@
 DISK_GB_REQUIRED=30
 
 PIP_PACKAGES=(
-
+    "conda"
 )
 
 EXTENSIONS=(
