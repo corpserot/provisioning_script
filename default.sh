@@ -13,14 +13,13 @@
 DISK_GB_REQUIRED=30
 
 PIP_PACKAGES=(
-    "conda"
 )
 
 EXTENSIONS=(
     "https://github.com/Mikubill/sd-webui-controlnet"
     "https://github.com/d8ahazard/sd_dreambooth_extension"
     "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
-    "https://github.com/gutris1/sd-hub"
+    "https://github.com/etherealxx/batchlinks-webui"
     "https://github.com/DominikDoom/a1111-sd-webui-tagcomplete"
     "https://github.com/aka7774/sd_filer"
     "https://github.com/Bing-su/adetailer"
