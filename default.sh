@@ -19,23 +19,29 @@ PIP_PACKAGES=(
 EXTENSIONS=(
     "https://github.com/Mikubill/sd-webui-controlnet"
     "https://github.com/d8ahazard/sd_dreambooth_extension"
-    "https://github.com/deforum-art/sd-webui-deforum"
-    "https://github.com/adieyal/sd-dynamic-prompts"
-    "https://github.com/ototadana/sd-face-editor"
     "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
-    "https://github.com/hako-mikan/sd-webui-regional-prompter"
-    "https://github.com/pkuliyi2015/multidiffusion-upscaler-for-automatic1111"
-    "https://github.com/Gourieff/sd-webui-reactor"
     "https://github.com/gutris1/sd-hub"
-    "https://github.com/mcmonkeyprojects/sd-dynamic-thresholding"
-    "https://github.com/mcmonkeyprojects/sd-infinity-grid-generator-script"
     "https://github.com/DominikDoom/a1111-sd-webui-tagcomplete"
     "https://github.com/aka7774/sd_filer"
     "https://github.com/Bing-su/adetailer"
-    "https://github.com/thomasasfk/sd-webui-aspect-ratio-helper"
     "https://github.com/BlafKing/sd-civitai-browser-plus"
-    ""
+    "https://github.com/hako-mikan/sd-webui-supermerger"
+    "https://github.com/mix1009/model-keyword"
 )
+if [ -n "$PROVISIONING_FULL_INSTALL" ]; then
+    EXTENSIONS+=(
+        "https://github.com/deforum-art/sd-webui-deforum"
+        "https://github.com/adieyal/sd-dynamic-prompts"
+        "https://github.com/ototadana/sd-face-editor"
+        "https://github.com/hako-mikan/sd-webui-regional-prompter"
+        "https://github.com/pkuliyi2015/multidiffusion-upscaler-for-automatic1111"
+        "https://github.com/Gourieff/sd-webui-reactor"
+        "https://github.com/mcmonkeyprojects/sd-dynamic-thresholding"
+        "https://github.com/mcmonkeyprojects/sd-infinity-grid-generator-script"
+        "https://github.com/thomasasfk/sd-webui-aspect-ratio-helper"
+    )
+fi
+
 EXTENSIONS_NAMED=(
     #<LINK> <DIRECTORY>
     "https://github.com/lobehub/sd-webui-lobe-theme" lobe-theme
@@ -49,12 +55,12 @@ CHECKPOINT_MODELS=(
 )
 
 LORA_MODELS=(
-    #"https://civitai.com/api/download/models/16576"
     "https://huggingface.co/ByteDance/Hyper-SD/resolve/main/Hyper-SDXL-2steps-lora.safetensors"
+    "https://huggingface.co/ByteDance/Hyper-SD/resolve/main/Hyper-SD15-2steps-lora.safetensors"
 )
 
 VAE_MODELS=(
-    "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
+    #"https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
     "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
     "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
 )
@@ -62,35 +68,39 @@ VAE_MODELS=(
 EMBEDDING_NEGATIVE_MODELS=(
     "https://huggingface.co/gsdf/Counterfeit-V3.0/resolve/main/embedding/EasyNegativeV2.safetensors"
     "https://huggingface.co/embed/negative/resolve/main/bad-hands-5.pt"
-    "https://huggingface.co/embed/negative/resolve/main/bad_prompt_version2.pt"
+    #"https://huggingface.co/embed/negative/resolve/main/bad_prompt_version2.pt"
     "https://huggingface.co/embed/negative/resolve/main/ng_deepnegative_v1_75t"
     "https://huggingface.co/ffxvs/negative-prompts-pack/resolve/main/badhandv4.pt"
 )
 
 ESRGAN_MODELS=(
-    "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
-    "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
-    "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
+    #"https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
+    #"https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
+    #"https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
 )
 
 CONTROLNET_MODELS=(
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_hed-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_mlsd-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_normal-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_scribble-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_seg-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_color-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_keypose-fp16.safetensors"
-    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_seg-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_style-fp16.safetensors"
 )
+if [ -n "$PROVISIONING_FULL_INSTALL" ]; then
+    CONTROLNET_MODELS+=(
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
+    )
+fi
 
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
@@ -123,6 +133,9 @@ function provisioning_start() {
     provisioning_get_models \
         "${WORKSPACE}/storage/stable_diffusion/models/esrgan" \
         "${ESRGAN_MODELS[@]}"
+        
+    provisioning_download "https://raw.githubusercontent.com/Sushrut1101/GoFile-Upload/master/upload.sh" "${WORKSPACE/storage/}"
+    chmod a+x "${WORKSPACE/storage/upload.sh}"
      
     PLATFORM_FLAGS=""
     if [[ $XPU_TARGET = "CPU" ]]; then
