@@ -2,7 +2,11 @@
 # This file will be sourced in init.sh
 # Namespace functions with provisioning_
 
+#Modified from
 # https://raw.githubusercontent.com/ai-dock/kohya_ss/main/config/provisioning/default.sh
+
+# Quick overrides:
+# PROVISIONING_SCRIPT: https://raw.githubusercontent.com/corpserot/provisioning_script/main/kohya_gui.sh
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 

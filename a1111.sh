@@ -6,7 +6,7 @@
 # https://github.com/ai-dock/stable-diffusion-webui/blob/d22f94fc86a85a26e79cc8d5ff52c0608b1a1053/config/provisioning/newbase.sh
 
 # Quick overrides:
-# PROVISIONING_SCRIPT: https://raw.githubusercontent.com/corpserot/provisioning_script/main/default.sh
+# PROVISIONING_SCRIPT: https://raw.githubusercontent.com/corpserot/provisioning_script/main/a1111.sh
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
