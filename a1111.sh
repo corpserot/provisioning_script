@@ -5,14 +5,15 @@
 # Modified from:
 # https://github.com/ai-dock/stable-diffusion-webui/blob/d22f94fc86a85a26e79cc8d5ff52c0608b1a1053/config/provisioning/newbase.sh
 
-# Secrets:
-# CIVITAI_API_KEY: API key for downloading models
+# Quick overrides:
+# PROVISIONING_SCRIPT: https://raw.githubusercontent.com/corpserot/provisioning_script/main/default.sh
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
 DISK_GB_REQUIRED=30
 
 PIP_PACKAGES=(
+    #"package==version"
 )
 
 EXTENSIONS=(
@@ -20,15 +21,16 @@ EXTENSIONS=(
     "https://github.com/d8ahazard/sd_dreambooth_extension"
     "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
     "https://github.com/etherealxx/batchlinks-webui"
-    "https://github.com/DominikDoom/a1111-sd-webui-tagcomplete"
     "https://github.com/aka7774/sd_filer"
-    "https://github.com/Bing-su/adetailer"
     "https://github.com/BlafKing/sd-civitai-browser-plus"
     "https://github.com/hako-mikan/sd-webui-supermerger"
-    "https://github.com/mix1009/model-keyword"
+    "https://github.com/hako-mikan/sd-webui-traintrain"
 )
 if [ -n "$PROVISIONING_FULL_INSTALL" ]; then
     EXTENSIONS+=(
+        "https://github.com/DominikDoom/a1111-sd-webui-tagcomplete"
+        "https://github.com/mix1009/model-keyword"
+        "https://github.com/Bing-su/adetailer"
         "https://github.com/deforum-art/sd-webui-deforum"
         "https://github.com/adieyal/sd-dynamic-prompts"
         "https://github.com/ototadana/sd-face-editor"
@@ -47,7 +49,7 @@ EXTENSIONS_NAMED=(
 )
 
 CHECKPOINT_MODELS=(
-    #"https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
+    "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
     #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
     #"https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
     #"https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
