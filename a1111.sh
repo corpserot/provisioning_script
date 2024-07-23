@@ -26,7 +26,7 @@ EXTENSIONS=(
     "https://github.com/hako-mikan/sd-webui-supermerger"
     "https://github.com/hako-mikan/sd-webui-traintrain"
 )
-if [ -n "$PROVISIONING_FULL_INSTALL" ]; then
+if [[ -n "$PROVISIONING_FULL_INSTALL" ]]; then
     EXTENSIONS+=(
         "https://github.com/DominikDoom/a1111-sd-webui-tagcomplete"
         "https://github.com/mix1009/model-keyword"
@@ -94,7 +94,7 @@ CONTROLNET_MODELS=(
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_style-fp16.safetensors"
 )
-if [ -n "$PROVISIONING_FULL_INSTALL" ]; then
+if [[ -n "$PROVISIONING_FULL_INSTALL" ]]; then
     CONTROLNET_MODELS+=(
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors"
@@ -109,6 +109,21 @@ fi
 function provisioning_start() {
     source /opt/ai-dock/etc/environment.sh
     source /opt/ai-dock/bin/venv-set.sh webui
+
+    apt-get update
+    apt -y install -qq aria2
+    "$WEBUI_VENV_PIP" install --no-cache-dir gdown
+    wget https://mega.nz/linux/repo/xUbuntu_24.04/amd64/megacmd-xUbuntu_24.04_amd64.deb && apt install "$PWD/megacmd-xUbuntu_24.04_amd64.deb"
+    rm -rf "$PWD/megacmd-xUbuntu_24.04_amd64.deb"
+    (
+        mkdir -p /workspace/storage
+        cd /workspace/storage
+        git clone https://github.com/ltsdw/gofile-downloader.git
+        cd gofile-downloader
+        "$WEBUI_VENV_PIP" install --no-cache-dir -r requirements.txt
+        chmod a+x gofile-downloader.py
+        ln -s gofile-downloader.py /bin/gofile-dl
+    )
 
     DISK_GB_AVAILABLE=$(($(df --output=avail -m "${WORKSPACE}" | tail -n1) / 1000))
     DISK_GB_USED=$(($(df --output=used -m "${WORKSPACE}" | tail -n1) / 1000))
@@ -135,8 +150,10 @@ function provisioning_start() {
         "${WORKSPACE}/storage/stable_diffusion/models/esrgan" \
         "${ESRGAN_MODELS[@]}"
         
-    provisioning_download "https://raw.githubusercontent.com/Sushrut1101/GoFile-Upload/master/upload.sh" "${WORKSPACE/storage/}"
+    provisioning_download "https://raw.githubusercontent.com/corpserot/provisioning_script/main/upload.sh" "${WORKSPACE/storage/}"
     chmod a+x "${WORKSPACE/storage/upload.sh}"
+    provisioning_download "https://raw.githubusercontent.com/corpserot/provisioning_script/main/download.sh" "${WORKSPACE/storage/}"
+    chmod a+x "${WORKSPACE/storage/download.sh}"
      
     PLATFORM_FLAGS=""
     if [[ $XPU_TARGET = "CPU" ]]; then
@@ -241,7 +258,11 @@ function provisioning_print_end() {
 
 # Download from $1 URL to $2 file path
 function provisioning_download() {
-    wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+    if [[ -n "PROVISIONING_WGET" ]]; then
+        wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+    else
+        aria2c --console-log-level=error --optimize-concurrent-downloads -c -x 16 -s 16 -k 1M -d "$2" "$1"
+    fi
 }
 
 provisioning_start
