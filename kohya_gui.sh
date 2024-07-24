@@ -42,19 +42,19 @@ function provisioning_start() {
     source /opt/ai-dock/etc/environment.sh
     source /opt/ai-dock/bin/venv-set.sh kohya
 
-    apt-get update
-    apt -y install -qq aria2
+    sudo apt-get update
+    sudo apt -y install -qq aria2
     "$WEBUI_VENV_PIP" install --no-cache-dir gdown
-    wget https://mega.nz/linux/repo/xUbuntu_24.04/amd64/megacmd-xUbuntu_24.04_amd64.deb && apt install "$PWD/megacmd-xUbuntu_24.04_amd64.deb"
-    rm -rf "$PWD/megacmd-xUbuntu_24.04_amd64.deb"
+    #wget https://mega.nz/linux/repo/xUbuntu_24.04/amd64/megacmd-xUbuntu_24.04_amd64.deb && sudo apt install "$PWD/megacmd-xUbuntu_24.04_amd64.deb"
+    #rm -rf "$PWD/megacmd-xUbuntu_24.04_amd64.deb"
     (
         mkdir -p /workspace/storage
         cd /workspace/storage
         git clone https://github.com/ltsdw/gofile-downloader.git
         cd gofile-downloader
         "$WEBUI_VENV_PIP" install --no-cache-dir -r requirements.txt
-        chmod a+x gofile-downloader.py
-        ln -s gofile-downloader.py /bin/gofile-dl
+        sudo chmod a+x gofile-downloader.py
+        sudo ln -s gofile-downloader.py /bin/gofile-dl
     )
 
     DISK_GB_AVAILABLE=$(($(df --output=avail -m "${WORKSPACE}" | tail -n1) / 1000))
@@ -68,9 +68,9 @@ function provisioning_start() {
         "${CHECKPOINT_MODELS[@]}"
 
     provisioning_download "https://raw.githubusercontent.com/corpserot/provisioning_script/main/upload.sh" "${WORKSPACE/storage/}"
-    chmod a+x "${WORKSPACE/storage/upload.sh}"
+    sudo chmod a+x "${WORKSPACE/storage/upload.sh}"
     provisioning_download "https://raw.githubusercontent.com/corpserot/provisioning_script/main/download.sh" "${WORKSPACE/storage/}"
-    chmod a+x "${WORKSPACE/storage/download.sh}"
+    sudo chmod a+x "${WORKSPACE/storage/download.sh}"
 
     provisioning_print_end
 }

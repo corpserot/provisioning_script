@@ -12,8 +12,8 @@ if [[ "$LINK" = *"gofile.io/"* ]]; then
     gofile-dl "$@"
 elif [[ "$LINK" = *"drive.google.com/"* ]]; then
     gdown --fuzzy "$@"
-elif [[ "$LINK" = *"mega.co/"* || "$LINK" = *"mega.nz/"* ]]; then
-    mega-get "$@"
+#elif [[ "$LINK" = *"mega.co/"* || "$LINK" = *"mega.nz/"* ]]; then
+#    mega-get "$@"
 elif [[ -n "$PROVISIONING_WGET" ]]; then
     wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" "$@"
 else
