@@ -110,10 +110,10 @@ function provisioning_start() {
     source /opt/ai-dock/etc/environment.sh
     source /opt/ai-dock/bin/venv-set.sh webui
 
-    apt-get update
-    apt -y install -qq aria2
+    sudo apt-get update
+    sudo apt -y install -qq aria2
     "$WEBUI_VENV_PIP" install --no-cache-dir gdown
-    #wget https://mega.nz/linux/repo/xUbuntu_24.04/amd64/megacmd-xUbuntu_24.04_amd64.deb && apt install "$PWD/megacmd-xUbuntu_24.04_amd64.deb"
+    #wget https://mega.nz/linux/repo/xUbuntu_24.04/amd64/megacmd-xUbuntu_24.04_amd64.deb && sudo apt install "$PWD/megacmd-xUbuntu_24.04_amd64.deb"
     #rm -rf "$PWD/megacmd-xUbuntu_24.04_amd64.deb"
     (
         mkdir -p /workspace/storage
